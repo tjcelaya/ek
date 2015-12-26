@@ -1,0 +1,33 @@
+NL      : '\n'
+        ;
+
+SPACE   : ' '
+        ;
+
+ident   : /[a-z]+[0-9A-Z]*/
+        ;
+
+expr    : '1'
+        ;
+
+pair    : <tag> ": " <expr>
+        ;
+
+list    : '[' (<expr>)* ']'
+        ;
+
+fn      : '{' (<SPACE> | <NL>)* <expr> (<SPACE>)* '}'
+        | '&' <tag>
+        ;
+
+tag     : '`' <ident>
+        ;
+
+sym     : '+' | <tag>
+        ;
+
+rule    : (<sym> (<SPACE> <sym>)*)+ (<SPACE>)* "=>" (<SPACE>)* <fn>
+        ;
+
+prog    : (<rule> <NL>)+
+        ;
